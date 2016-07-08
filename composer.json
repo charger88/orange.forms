@@ -1,0 +1,17 @@
+{
+  "name": "charger88/orange.forms",
+  "description": "This library implements HTML forms functionality as PHP objects.",
+  "minimum-stability": "stable",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Mikhail Kelner",
+      "email": "mikhail.kelner@gmail.com"
+    }
+  ]
+}
