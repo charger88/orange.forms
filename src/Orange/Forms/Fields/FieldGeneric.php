@@ -8,10 +8,10 @@ abstract class FieldGeneric implements FieldInterface
     protected $id = '';
     protected $name = '';
     protected $label = null;
-    protected $attributes = [];
-    protected $required = false;
-    protected $disabled = false;
-    protected $readonly = false;
+    public $attributes = [];
+    public $required = false;
+    public $disabled = false;
+    public $readonly = false;
 
     public function __construct($id, $label = null)
     {

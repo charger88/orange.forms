@@ -6,8 +6,9 @@ abstract class SelectorGeneric extends \Orange\Forms\Fields\FieldGeneric {
 
     protected $options = [];
 
-    public function __construct($id,$options = []){
+    public function __construct($id,$label = null,$options = []){
         $this->id = $this->name = $id;
+        $this->label = $label;
         $this->setOptions($options);
     }
 
