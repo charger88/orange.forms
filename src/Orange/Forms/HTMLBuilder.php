@@ -20,10 +20,10 @@ class HTMLBuilder
         return '<div class="orange-forms-row-wrapper">' . $row_html . '</div>';
     }
 
-    public function wrapField($field_html, $field_classes = [])
+    public function wrapField($field_html, $field_classes = [], $errors = [])
     {
         $field_classes[] = 'orange-forms-field-wrapper';
-        return '<div class="' . implode(' ', $field_classes) . '">' . $field_html . '</div>';
+        return '<div class="' . implode(' ', $field_classes) . '">' . $field_html . ($errors ? '<ul class="orange-forms-field-errors"><li>' . implode('</li><li>', $errors) . '</li></li></ul>' : '') . '</div>';
     }
 
     public function getLabelHTML($label, $for_id)

@@ -40,11 +40,16 @@ class SimpleForm extends \Orange\Forms\Form
 
 $form = new SimpleForm();
 $form->setValues($_POST);
+$form->addError('password', 'Show error');
 
 ?>
 <html>
 <head>
-    <link href="style.css" rel="stylesheet" type="text/css"/>
+    <style>
+        .orange-forms-field-errors {
+            color: red;
+        }
+    </style>
 </head>
 <body>
 <?php echo $form->getHTML(); ?>

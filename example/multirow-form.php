@@ -30,7 +30,6 @@ $form->setValues($_POST);
 ?>
 <html>
 <head>
-    <link href="style.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <?php echo $form->getHTML(); ?>
