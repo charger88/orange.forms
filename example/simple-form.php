@@ -13,6 +13,7 @@ use \Orange\Forms\Fields\Selectors\Radio;
 use \Orange\Forms\Fields\Inputs\Textarea;
 use \Orange\Forms\Fields\Buttons\Submit;
 use \Orange\Forms\Fields\Buttons\Reset;
+use \Orange\Forms\Fields\Html;
 
 class SimpleForm extends \Orange\Forms\Form
 {
@@ -29,6 +30,7 @@ class SimpleForm extends \Orange\Forms\Form
         $this->addField((new Select('numbers', 'Numbers', [0 => 'Zero', 1 => 'One', 2 => 'Two']))->setEmptyOption(Select::EMPTY_OPTION_ALWAYS));
         $this->addField((new Radio('numbersx', 'Numbers2', [0 => 'Zero', 1 => 'One', 2 => 'Two'])));
         $this->addField((new Textarea('my_text'))->requireField());
+        $this->addField((new Html('<b>HTML code</b>')));
         $this->addField((new Submit('my-submit', 'Save')));
         $this->addField((new Reset('my-reset', 'Reset'))->disable());
 
