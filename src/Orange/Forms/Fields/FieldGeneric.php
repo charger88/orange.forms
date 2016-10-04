@@ -19,15 +19,16 @@ abstract class FieldGeneric implements FieldInterface
         $this->label = $label;
     }
 
+    public function getClasses()
+    {
+        return ['orange-forms-field'];
+    }
+
     public function placeholder()
     {
         $this->attributes['placeholder'] = $this->label;
         $this->label = null;
-    }
-
-    public function getClasses()
-    {
-        return ['orange-forms-field'];
+        return $this;
     }
 
     public function setID($id)

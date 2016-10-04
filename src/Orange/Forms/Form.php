@@ -80,7 +80,7 @@ abstract class Form
     public function setError($name, $error)
     {
         $this->errors[$name] = [$error];
-        return $this;
+
     }
 
     public function addError($name, $error)
