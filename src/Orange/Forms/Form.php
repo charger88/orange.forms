@@ -115,7 +115,7 @@ abstract class Form
             foreach ($region as $field) {
                 $output .= $this->HTMLBuilder->wrapField(
                     $field->getHTML(
-                        isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : null,
+                        isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : $field->getDefault(),
                         $this->HTMLBuilder
                     ),
                     $field->getClasses(),

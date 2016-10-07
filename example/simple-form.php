@@ -22,6 +22,7 @@ class SimpleForm extends \Orange\Forms\Form
     {
 
         $this->addField((new Text('name', 'Name'))->setReadonly());
+        $this->addField((new Text('surname', 'Surname'))->placeholder());
         $this->addField((new Hidden('hidden_field')));
         $this->addField((new Date('birthday', 'Birthday')));
         $this->addField((new Color('color', 'Color')));

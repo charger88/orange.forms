@@ -10,6 +10,7 @@ abstract class FieldGeneric implements FieldInterface
     protected $label = null;
     public $attributes = [];
     public $required = false;
+    public $default_value = null;
     public $disabled = false;
     public $readonly = false;
 
@@ -76,6 +77,17 @@ abstract class FieldGeneric implements FieldInterface
     {
         $this->readonly = true;
         return $this;
+    }
+
+    public function setDefault($value)
+    {
+        $this->default_value = $value;
+        return $this;
+    }
+
+    public function getDefault()
+    {
+        return $this->default_value;
     }
 
     public function setNotReadonly()
