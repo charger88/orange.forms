@@ -38,7 +38,7 @@ class Fieldset implements \Orange\Forms\Fields\FieldInterface
     public function getClasses()
     {
         return [
-            'orange-forms-multirow'
+            'orange-forms-fieldset'
         ];
     }
 
