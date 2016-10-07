@@ -8,9 +8,9 @@ abstract class FieldGeneric implements FieldInterface
     protected $id = '';
     protected $name = '';
     protected $label = null;
+    protected $default_value = null;
     public $attributes = [];
     public $required = false;
-    public $default_value = null;
     public $disabled = false;
     public $readonly = false;
 

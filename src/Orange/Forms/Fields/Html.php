@@ -23,4 +23,8 @@ class Html implements FieldInterface {
         return null;
     }
 
+    public function getDefault(){
+        return '';
+    }
+
 }
