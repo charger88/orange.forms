@@ -22,7 +22,11 @@ abstract class FieldGeneric implements FieldInterface
 
     public function getClasses()
     {
-        return ['orange-forms-field'];
+        $classes = ['orange-forms-field'];
+        if ($this->required){
+            $classes[] = 'orange-forms-field-required';
+        }
+        return $classes;
     }
 
     public function placeholder()
