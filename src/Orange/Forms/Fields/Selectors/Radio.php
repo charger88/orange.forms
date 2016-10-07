@@ -11,13 +11,14 @@ class Radio extends SelectorGeneric {
         foreach ($this->options as $key => $label) {
             $n++;
             $this->id = $id . '-' . $n;
-            $output .= '<div class="orange-forms-field-radio-item-wrapper"><input type="radio"';
+            $output .= '<div class="orange-forms-field-radio-item-wrapper">';
+            $output .= '<label for="' . $this->id . '"><input type="radio"';
             if (''.$key === ''.$value){
                 $output .= ' checked="checked"';
             }
             $output .= $this->buildAttributes($this->attributes);
             $output .= ' value="' . addslashes($key) . '" />';
-            $output .= '<label for="' . $this->id . '">'.$label.'</label></div>';
+            $output .= ' '.$label.'</label></div>';
         }
         $this->id = $id;
         return $output;
