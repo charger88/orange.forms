@@ -28,7 +28,8 @@ class Fieldset implements \Orange\Forms\Fields\FieldInterface
             $output .= '<legend>' . $this->label . '</legend><div class="orange-forms-fieldset-data">';
         }
         foreach ($this->fields as $field) {
-            $field_value = isset($value[$field->getName()]) ? $value[$field->getName()] : $field->getDefault();
+            $name = rtrim($field->getName(), '[]');
+            $field_value = isset($value[$name]) ? $value[$name] : $field->getDefault();
             $output .= $HTMLBuilder->wrapField($field->getHTML($field_value, $HTMLBuilder), $field->getClasses());
         }
         $output .= '</div></fieldset>';

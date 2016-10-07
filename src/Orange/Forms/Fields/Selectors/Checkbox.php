@@ -11,7 +11,8 @@ class Checkbox extends FieldGeneric {
     public function getHTML($value, $HTMLBuilder){
         $output = '<div class="orange-forms-field-checkbox-item-wrapper">';
         $output .= '<label for="' . $this->id . '"><input type="checkbox"';
-        if (''.$this->default_value === ''.$value){
+        $checked = (is_array($value) && in_array(''.$this->default_value, $value)) || (!is_array($value) &&(''.$this->default_value === ''.$value));
+        if ($checked){
             $output .= ' checked="checked"';
         }
         $output .= $this->buildAttributes($this->attributes);

@@ -122,9 +122,10 @@ abstract class Form
             $output .= $this->HTMLBuilder->getRegionWrapperStart($region_id);
             foreach ($region as $field) {
                 $multi = ($field instanceof Multirow) || ($field instanceof Fieldset);
+                $name = rtrim($field->getName(), '[]');
                 $output .= $this->HTMLBuilder->wrapField(
                     $field->getHTML(
-                        $multi ? $this->values : (isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : $field->getDefault()),
+                        $multi ? $this->values : (isset($this->values[$name]) ? $this->values[$name] : $field->getDefault()),
                         $this->HTMLBuilder
                     ),
                     $field->getClasses(),
