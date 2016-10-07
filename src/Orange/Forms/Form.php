@@ -104,6 +104,11 @@ abstract class Form
         if ($this->datatype) {
             $output .= ' enctype="' . $this->datatype . '"';
         }
+        if (!array_key_exists('class', $this->attributes)){
+            $this->attributes['class'] = '';
+        }
+        $this->attributes['class'] .= ' orange-forms-form';
+        $this->attributes['class'] = trim($this->attributes['class']);
         if ($this->attributes) {
             foreach ($this->attributes as $attribute => $value) {
                 $output .= ' ' . $attribute . '="' . $value . '"';
