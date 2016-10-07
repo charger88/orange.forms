@@ -25,13 +25,13 @@ class Fieldset implements \Orange\Forms\Fields\FieldInterface
     {
         $output = '<fieldset id="fieldset-'.addslashes($this->id).'">';
         if ($this->label) {
-            $output .= '<legend>' . $this->label . '</legend>';
+            $output .= '<legend>' . $this->label . '</legend><div class="orange-forms-fieldset-data">';
         }
         foreach ($this->fields as $field) {
             $field_value = isset($value[$field->getName()]) ? $value[$field->getName()] : $field->getDefault();
             $output .= $HTMLBuilder->wrapField($field->getHTML($field_value, $HTMLBuilder), $field->getClasses());
         }
-        $output .= '</fieldset>';
+        $output .= '</div></fieldset>';
         return $output;
     }
 
