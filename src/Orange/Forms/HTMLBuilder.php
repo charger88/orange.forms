@@ -7,12 +7,12 @@ class HTMLBuilder
 
     public function getRegionWrapperStart($region_id)
     {
-        return '';
+        return !is_null($region_id) ? '<div id="form-region-' . addslashes($region_id) . '">' : '';
     }
 
     public function getRegionWrapperEnd($region_id)
     {
-        return '';
+        return !is_null($region_id) ? '</div>' : '';
     }
 
     public function wrapFieldsRow($row_html)
