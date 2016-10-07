@@ -10,11 +10,15 @@ class Select extends SelectorGeneric {
 
     protected $emptyOptionPolicy = self::EMPTY_OPTION_NULL_VALUE_ONLY;
     protected $emptyOptionText = '';
+    protected $multiple = false;
 
     public function getHTML($value, $HTMLBuilder){
         $output = $this->label ? $HTMLBuilder->getLabelHTML($this->label, $this->id) : '';
         $output .= '<select';
         $output .= ' '.$this->buildAttributes().' ';
+        if ($this->multiple){
+            $output .= ' multiple="multiple" ';
+        }
         $output .= $this->buildAttributes($this->attributes);
         $output .= '>';
         $selected = false;
@@ -27,7 +31,8 @@ class Select extends SelectorGeneric {
         }
         foreach ($this->options as $key => $label) {
             $output .= '<option';
-            if ((string)$key === (string)$value){
+            $checked = (is_array($value) && in_array(''.$key, $value)) || (!is_array($value) && (''.$key === ''.$value));
+            if ($checked){
                 $output .= ' selected="selected"';
                 $selected = true;
             }
@@ -49,7 +54,15 @@ class Select extends SelectorGeneric {
     public function getClasses(){
         $classes = parent::getClasses();
         $classes[] = 'orange-forms-field-select';
+        if ($this->multiple){
+            $classes[] = 'orange-forms-field-select-multiple';
+        }
         return $classes;
+    }
+
+    public function setMultiple($value = true){
+        $this->multiple = $value;
+        return $this;
     }
 
 }
