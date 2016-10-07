@@ -10,4 +10,6 @@ interface FieldInterface {
 
     public function getName();
 
+    public function getDefault();
+
 }

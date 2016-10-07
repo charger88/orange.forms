@@ -23,18 +23,19 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
 
     public function getHTML($value, $HTMLBuilder)
     {
+        $value = isset($value[$this->getName()]) ? $value[$this->getName()] : $this->getDefault();
         $output = '<fieldset>';
         if ($this->label) {
             $output .= '<legend>' . $this->label . '</legend>';
         }
-        if (is_null($value)) {
+        if (empty($value)) {
             $value = [];
             foreach ($this->fields as $fieldOrg) {
                 $value[$fieldOrg->getName()] = [];
             }
         }
         foreach ($value as $column => $values) {
-            $values[] = null;
+            $values[] = null; // It is about empty row
             $value[$column] = $values;
         }
         $one_empty = false;
@@ -45,7 +46,9 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
             foreach ($this->fields as $fieldOrg) {
                 $field = clone $fieldOrg;
                 $field->setID($this->id . '-' . $field->getName() . '-' . $index)->setName($this->id . '[' . $field->getName() . '][]');
-                $field_value = $value[$fieldOrg->getName()][$index];
+                $field_value = isset($value[$fieldOrg->getName()]) && isset($value[$fieldOrg->getName()][$index])
+                    ? $value[$fieldOrg->getName()][$index]
+                    : $fieldOrg->getDefault();
                 $not_empty = $not_empty || !empty($field_value);
                 $current .= $HTMLBuilder->wrapField($field->getHTML($field_value, $HTMLBuilder), $field->getClasses());
             }
@@ -70,6 +73,10 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
     public function getName()
     {
         return $this->id;
+    }
+
+    public function getDefault(){
+        return [];
     }
 
 }

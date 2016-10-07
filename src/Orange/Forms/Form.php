@@ -2,6 +2,9 @@
 
 namespace Orange\Forms;
 
+use Orange\Forms\Components\Multirow;
+use Orange\Forms\Components\Fieldset;
+
 abstract class Form
 {
 
@@ -111,16 +114,17 @@ abstract class Form
         $this->attributes['class'] = trim($this->attributes['class']);
         if ($this->attributes) {
             foreach ($this->attributes as $attribute => $value) {
-                $output .= ' ' . $attribute . '="' . $value . '"';
+                $output .= ' ' . $attribute . '="' . addslashes($value) . '"';
             }
         }
         $output .= '>';
         foreach ($this->scheme as $region_id => $region) {
             $output .= $this->HTMLBuilder->getRegionWrapperStart($region_id);
             foreach ($region as $field) {
+                $multi = ($field instanceof Multirow) || ($field instanceof Fieldset);
                 $output .= $this->HTMLBuilder->wrapField(
                     $field->getHTML(
-                        isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : $field->getDefault(),
+                        $multi ? $this->values : (isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : $field->getDefault()),
                         $this->HTMLBuilder
                     ),
                     $field->getClasses(),
