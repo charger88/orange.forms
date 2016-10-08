@@ -38,7 +38,7 @@ class Select extends SelectorGeneric {
             }
             $output .= ' value="' . $key . '">' . $label . '</option>';
         }
-        if (!$selected && (''.$value !== '')){
+        if (!$selected && ((is_array($value) && empty($value)) || (!is_array($value) && (''.$value !== '')))){
             $values = is_array($value) ? $value : [$value];
             foreach ($values as $v) {
                 if (!isset($this->options[$v])) {
