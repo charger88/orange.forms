@@ -23,7 +23,7 @@ class Fieldset implements \Orange\Forms\Fields\FieldInterface
 
     public function getHTML($value, $HTMLBuilder)
     {
-        $output = '<fieldset id="fieldset-'.addslashes($this->id).'">';
+        $output = '<fieldset id="fieldset-'.htmlspecialchars($this->id).'">';
         if ($this->label) {
             $output .= '<legend>' . $this->label . '</legend><div class="orange-forms-fieldset-data">';
         }

@@ -9,7 +9,7 @@ class Text extends \Orange\Forms\Fields\FieldGeneric {
     public function getHTML($value, $HTMLBuilder){
         $output = $this->label ? $HTMLBuilder->getLabelHTML($this->label, $this->id) : '';
         $output .= '<input type="' . $this->type . '"';
-        $output .= ' value="' . addslashes($value) . '"';
+        $output .= ' value="' . htmlspecialchars($value) . '"';
         $output .= $this->buildAttributes($this->attributes);
         $output .= ' />';
         return $output;

@@ -114,7 +114,7 @@ abstract class Form
         $this->attributes['class'] = trim($this->attributes['class']);
         if ($this->attributes) {
             foreach ($this->attributes as $attribute => $value) {
-                $output .= ' ' . $attribute . '="' . addslashes($value) . '"';
+                $output .= ' ' . $attribute . '="' . htmlspecialchars($value) . '"';
             }
         }
         $output .= '>';

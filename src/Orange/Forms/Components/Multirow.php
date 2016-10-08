@@ -24,7 +24,7 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
     public function getHTML($value, $HTMLBuilder)
     {
         $value = isset($value[$this->getName()]) ? $value[$this->getName()] : $this->getDefault();
-        $output = '<fieldset id="multirow-'.addslashes($this->id).'">';
+        $output = '<fieldset id="multirow-'.htmlspecialchars($this->id).'">';
         if ($this->label) {
             $output .= '<legend>' . $this->label . '</legend><div class="orange-forms-rows-container">';
         }

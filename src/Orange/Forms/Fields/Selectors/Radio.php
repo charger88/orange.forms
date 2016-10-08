@@ -17,7 +17,7 @@ class Radio extends SelectorGeneric {
                 $output .= ' checked="checked"';
             }
             $output .= $this->buildAttributes($this->attributes);
-            $output .= ' value="' . addslashes($key) . '" />';
+            $output .= ' value="' . htmlspecialchars($key) . '" />';
             $output .= ' '.$label.'</label></div>';
         }
         $this->id = $id;

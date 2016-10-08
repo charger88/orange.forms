@@ -67,6 +67,12 @@ class Select extends SelectorGeneric {
 
     public function setMultiple($value = true){
         $this->multiple = $value;
+        if ($value){
+            $this->name .= '[]';
+        } else {
+            $sl = strlen($this->name) - 2;
+            $this->name = strpos($this->name, '[]') === $sl ? substr($this->name, 0, $sl) : $this->name;
+        }
         return $this;
     }
 

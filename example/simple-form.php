@@ -31,7 +31,7 @@ class SimpleForm extends \Orange\Forms\Form
         $this->addField((new Checkbox('checkbox', 'Checkbox')));
         $this->addField((new File('file1')));
         $this->addField((new Select('numbers', 'Numbers0', [0 => 'Zero', 1 => 'One', 2 => 'Two']))->setEmptyOption(Select::EMPTY_OPTION_ALWAYS));
-        $this->addField((new Select('numbersy', 'Numbers1', [0 => 'Zero', 1 => 'One', 2 => 'Two']))->setName('numbersy[]')->setEmptyOption(Select::EMPTY_OPTION_NO)->setMultiple());
+        $this->addField((new Select('numbersy', 'Numbers1', [0 => 'Zero', 1 => 'One', 2 => 'Two']))->setEmptyOption(Select::EMPTY_OPTION_NO)->setMultiple());
         $this->addField((new Radio('numbersx', 'Numbers2', [0 => 'Zero', 1 => 'One', 2 => 'Two'])));
         $this->addField((new Textarea('my_text'))->requireField());
         $this->addField((new Html('<b>HTML code</b>')));

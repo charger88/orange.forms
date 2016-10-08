@@ -9,7 +9,7 @@ class Button extends \Orange\Forms\Fields\FieldGeneric {
     public function getHTML($value, $HTMLBuilder){
         $output = '<button type="'.$this->type.'"';
         if (!is_null($value)) {
-            $output .= ' value="' . addslashes($value) . '"';
+            $output .= ' value="' . htmlspecialchars($value) . '"';
         }
         if ($this->disabled){
             $output .= ' disabled="disabled"';
