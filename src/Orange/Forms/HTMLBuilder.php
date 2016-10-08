@@ -7,7 +7,7 @@ class HTMLBuilder
 
     public function getRegionWrapperStart($region_id)
     {
-        return !is_null($region_id) ? '<div class="orange-forms-region" id="form-region-' . addslashes($region_id) . '">' : '';
+        return $region_id !== '___' ? '<div class="orange-forms-region" id="form-region-' . addslashes($region_id) . '">' : '';
     }
 
     public function getRegionWrapperEnd($region_id)

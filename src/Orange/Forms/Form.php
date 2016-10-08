@@ -71,7 +71,7 @@ abstract class Form
 
     abstract protected function init($params);
 
-    protected function addField($field, $region = null)
+    protected function addField($field, $region = '___')
     {
         if (!isset($this->scheme[$region])) {
             $this->scheme[$region] = [];
