@@ -26,7 +26,7 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
         $value = isset($value[$this->getName()]) ? $value[$this->getName()] : $this->getDefault();
         $output = '<fieldset id="multirow-'.addslashes($this->id).'">';
         if ($this->label) {
-            $output .= '<legend>' . $this->label . '</legend>';
+            $output .= '<legend>' . $this->label . '</legend><div class="orange-forms-rows-container">';
         }
         if (empty($value)) {
             $value = [];
@@ -59,7 +59,7 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
                 }
             }
         }
-        $output .= '</fieldset>';
+        $output .= '</div></fieldset>';
         return $output;
     }
 
