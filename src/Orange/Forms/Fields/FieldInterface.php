@@ -12,4 +12,6 @@ interface FieldInterface {
 
     public function getDefault();
 
+    public function validate();
+
 }

@@ -27,4 +27,9 @@ class Html implements FieldInterface {
         return '';
     }
 
+    public function validate(){
+        return [];
+    }
+
+
 }
