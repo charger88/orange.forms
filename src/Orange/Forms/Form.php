@@ -66,10 +66,11 @@ abstract class Form
     {
         foreach ($this->scheme as $region_id => $region) {
             foreach ($region as $field) {
-                $errors = $field->validate(isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : null);
                 if (($field instanceof Multirow) || ($field instanceof Fieldset)){
+                    $errors = $field->validate($this->values);
                     $this->errors = array_merge($this->errors, $errors);
                 } else {
+                    $errors = $field->validate(isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : null);
                     $this->errors[$field->getName()] = $errors;
                 }
                 $this->errors = array_filter($this->errors, function($v) {
@@ -143,14 +144,25 @@ abstract class Form
             foreach ($region as $field) {
                 $multi = ($field instanceof Multirow) || ($field instanceof Fieldset);
                 $name = rtrim($field->getName(), '[]');
-                $output .= $this->HTMLBuilder->wrapField(
-                    $field->getHTML(
-                        $multi ? $this->values : (isset($this->values[$name]) ? $this->values[$name] : $field->getDefault()),
-                        $this->HTMLBuilder
-                    ),
-                    $field->getClasses(),
-                    isset($this->errors[$field->getName()]) ? $this->errors[$field->getName()] : []
-                );
+                if ($multi){
+                    $output .= $this->HTMLBuilder->wrapField(
+                        $field->getHTML(
+                            $this->values,
+                            $this->HTMLBuilder,
+                            $this->errors
+                        ),
+                        $field->getClasses()
+                    );
+                } else {
+                    $output .= $this->HTMLBuilder->wrapField(
+                        $field->getHTML(
+                            isset($this->values[$name]) ? $this->values[$name] : $field->getDefault(),
+                            $this->HTMLBuilder
+                        ),
+                        $field->getClasses(),
+                        isset($this->errors[$field->getName()]) ? $this->errors[$field->getName()] : []
+                    );
+                }
             }
             $output .= $this->HTMLBuilder->getRegionWrapperEnd($region_id);
         }

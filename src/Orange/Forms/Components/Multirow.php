@@ -7,8 +7,7 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
 
     protected $id = null;
     protected $label = null;
-
-    public $fields = [];
+    protected $fields = [];
 
     public function __construct($id, $label = null)
     {
@@ -22,7 +21,8 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
         return $this;
     }
 
-    public function getHTML($value, $HTMLBuilder)
+    //TODO Errors support
+    public function getHTML($value, $HTMLBuilder, $errors = [])
     {
         $value = isset($value[$this->getName()]) ? $value[$this->getName()] : $this->getDefault();
         $output = '<fieldset id="multirow-'.htmlspecialchars($this->id).'">';
@@ -77,6 +77,11 @@ class Multirow implements \Orange\Forms\Fields\FieldInterface
     }
 
     public function getDefault(){
+        return [];
+    }
+
+    public function validate($values){
+        //TODO Implement
         return [];
     }
 
