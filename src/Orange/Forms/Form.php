@@ -65,16 +65,16 @@ abstract class Form
     public function validateValues()
     {
         foreach ($this->scheme as $region_id => $region) {
-            foreach ($region as $fields) {
-                $fields = (($fields instanceof Multirow) || ($fields instanceof Fieldset))
-                    ? $fields->fields
-                    : [$fields]
-                ;
-                foreach ($fields as $field) {
-                    if ($errors = $field->validate(isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : null)) {
-                        $this->errors[$field->getName()] = $errors;
-                    }
+            foreach ($region as $field) {
+                $errors = $field->validate(isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : null);
+                if (($field instanceof Multirow) || ($field instanceof Fieldset)){
+                    $this->errors = array_merge($this->errors, $errors);
+                } else {
+                    $this->errors[$field->getName()] = $errors;
                 }
+                $this->errors = array_filter($this->errors, function($v) {
+                    return !empty($v);
+                });
             }
         }
         return $this;

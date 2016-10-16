@@ -144,7 +144,7 @@ abstract class FieldGeneric implements FieldInterface
     //TODO Improve it
     public function validate($value){
         $errors = [];
-        if ($this->required && (is_null($value) || strlen($value))){
+        if ($this->required && (is_null($value) || (strlen($value) == 0))){
             $errors[] = Form::$errors_text['EMPTY'];
         }
         return $errors;

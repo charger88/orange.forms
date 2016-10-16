@@ -25,13 +25,13 @@ class SimpleForm extends \Orange\Forms\Form
         $this->addField((new Text('name', 'Name'))->requireField());
         $this->addField((new Text('surname', 'Surname'))->requireField());
         $this->addField((new Submit('my-submit', 'Save')));
-        $this->addField((new Reset('my-reset', 'Reset'))->disable());
 
     }
 
 }
 
 $form = new SimpleForm();
+$form->setValues(['surname' => 'Test']);
 $errors = $form->validateValues()->getErrors();
 
 ?>
