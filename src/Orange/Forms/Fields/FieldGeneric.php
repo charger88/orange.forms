@@ -2,6 +2,8 @@
 
 namespace Orange\Forms\Fields;
 
+use Orange\Forms\Form;
+
 abstract class FieldGeneric implements FieldInterface
 {
 
@@ -137,6 +139,15 @@ abstract class FieldGeneric implements FieldInterface
             $output .= ' ' . $key . '="' . htmlspecialchars($value) . '"';
         }
         return $output;
+    }
+
+    //TODO Improve it
+    public function validate($value){
+        $errors = [];
+        if ($this->required && (is_null($value) || strlen($value))){
+            $errors[] = Form::$errors_text['EMPTY'];
+        }
+        return $errors;
     }
 
 }

@@ -22,6 +22,10 @@ abstract class Form
     protected $errors = [];
     protected $values = [];
 
+    public static $errors_text = [
+        'EMPTY' => 'Field is empty',
+    ];
+
     public function __construct($params = [], $HTMLBuilder = null)
     {
         $this->HTMLBuilder = is_null($HTMLBuilder) ? new HTMLBuilder() : $HTMLBuilder;
@@ -60,13 +64,30 @@ abstract class Form
 
     public function validateValues()
     {
-        //TODO
+        foreach ($this->scheme as $region_id => $region) {
+            foreach ($region as $fields) {
+                $fields = (($fields instanceof Multirow) || ($fields instanceof Fieldset))
+                    ? $fields->fields
+                    : [$fields]
+                ;
+                foreach ($fields as $field) {
+                    if ($errors = $field->validate(isset($this->values[$field->getName()]) ? $this->values[$field->getName()] : null)) {
+                        $this->errors[$field->getName()] = $errors;
+                    }
+                }
+            }
+        }
         return $this;
     }
 
     public function getValues()
     {
         return $this->values;
+    }
+
+    public function getErrors()
+    {
+        return $this->errors;
     }
 
     abstract protected function init($params);
@@ -83,7 +104,6 @@ abstract class Form
     public function setError($name, $error)
     {
         $this->errors[$name] = [$error];
-
     }
 
     public function addError($name, $error)
