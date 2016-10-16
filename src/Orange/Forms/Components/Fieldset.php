@@ -7,7 +7,8 @@ class Fieldset implements \Orange\Forms\Fields\FieldInterface
 
     protected $id = null;
     protected $label = null;
-    protected $fields = [];
+
+    public $fields = [];
 
     public function __construct($id, $label = null)
     {
