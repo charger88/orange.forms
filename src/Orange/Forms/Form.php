@@ -10,6 +10,7 @@ abstract class Form
 
     const METHOD_GET = 'get';
     const METHOD_POST = 'post';
+    const XSRF_FIELD_NAME = '_xsrf_protection_code';
 
     protected $action = '';
     protected $method = self::METHOD_POST;
@@ -21,6 +22,8 @@ abstract class Form
     protected $scheme = [];
     protected $errors = [];
     protected $values = [];
+
+    protected $xsrf_protection = false;
 
     public static $errors_text = [
         'EMPTY' => 'Field is empty',
@@ -60,6 +63,38 @@ abstract class Form
     {
         $this->values = $values;
         return $this;
+    }
+
+    public function enableXSRFProtection(){
+        $this->xsrf_protection = true;
+        return $this;
+    }
+
+    public function disableXSRFProtection(){
+        $this->xsrf_protection = false;
+        return $this;
+    }
+
+    public function checkXSRF($key = null){
+        if (!$this->xsrf_protection){
+            return true;
+        }
+        if (is_null($key)){
+            if (isset($this->values[self::XSRF_FIELD_NAME])){
+                $key = $this->values[self::XSRF_FIELD_NAME];
+            } else {
+                if ($this->method === self::METHOD_GET) {
+                    if (isset($_GET[self::XSRF_FIELD_NAME])) {
+                        $key = $_GET[self::XSRF_FIELD_NAME];
+                    }
+                } else if ($this->method === self::METHOD_POST){
+                    if (isset($_POST[self::XSRF_FIELD_NAME])){
+                        $key = $_POST[self::XSRF_FIELD_NAME];
+                    }
+                }
+            }
+        }
+        return XSRFProtection::getInstance()->check($key, [get_class($this)]);
     }
 
     public function validateValues()
@@ -165,6 +200,9 @@ abstract class Form
                 }
             }
             $output .= $this->HTMLBuilder->getRegionWrapperEnd($region_id);
+        }
+        if ($this->xsrf_protection){
+            $output .= '<input type="hidden" name="' . self::XSRF_FIELD_NAME . '" value="' . XSRFProtection::getInstance()->key([get_class($this)]) . '" />';
         }
         $output .= '</form>';
         return $output;
