@@ -31,10 +31,14 @@ abstract class FieldGeneric implements FieldInterface
         return $classes;
     }
 
-    public function placeholder()
+    public function placeholder($text = null)
     {
-        $this->attributes['placeholder'] = $this->label;
-        $this->label = null;
+        if (is_null($text)) {
+            $this->attributes['placeholder'] = $this->label;
+            $this->label = null;
+        } else {
+            $this->attributes['placeholder'] = $text;
+        }
         return $this;
     }
 
