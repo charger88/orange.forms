@@ -12,7 +12,7 @@ class HTMLBuilder
 
     public function getRegionWrapperEnd($region_id)
     {
-        return !is_null($region_id) ? '</div>' : '';
+        return $region_id !== '___' ? '</div>' : '';
     }
 
     public function wrapFieldsRow($row_html)
