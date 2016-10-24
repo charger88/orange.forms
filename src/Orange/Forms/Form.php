@@ -121,6 +121,14 @@ abstract class Form
         return $this->values;
     }
 
+    public function getValuesWithXSRFCheck()
+    {
+        if (!$this->checkXSRF()){
+            throw new XSRFException('XSRF protection key is invalid');
+        }
+        return $this->values;
+    }
+
     public function getErrors()
     {
         return $this->errors;
