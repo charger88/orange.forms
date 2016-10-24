@@ -126,7 +126,7 @@ abstract class Form
         if (!$this->checkXSRF()){
             throw new XSRFException('XSRF protection key is invalid');
         }
-        return $this->values;
+        return $this->getValues();
     }
 
     public function getErrors()

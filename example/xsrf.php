@@ -18,6 +18,8 @@ class XSRFProtectedForm extends \Orange\Forms\Form
 
 }
 
+\Orange\Forms\XSRFProtection::addUniqueKeyComponent(getenv('REMOTE_ADDR'));
+
 $form = new XSRFProtectedForm();
 $form->setValues($_POST);
 
